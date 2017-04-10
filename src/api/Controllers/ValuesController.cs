@@ -9,8 +9,10 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        // GET api/values
-        [HttpGet]
+        /// <summary>
+        ///  Does something userful
+        /// </summary>
+        [HttpGet("[action]")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

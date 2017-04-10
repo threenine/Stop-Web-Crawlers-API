@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace api
 {
@@ -34,8 +36,22 @@ namespace api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Stop Web Crawlers Update API", Version = "v1" });
-            });
+                c.SwaggerDoc("v1", 
+                new Info 
+                {
+                    Title = "Stop Web Crawlers Update API", 
+                    Version = "v1" ,
+                    Description = "Stop Web Crawlers Update API to enable the update of Referer Spammer Lists",
+                    TermsOfService = "None",
+                    Contact = new Contact { Name = "threenine.co.uk", Email ="support@threenine.co.uk", Url ="https://twitter.com/threenine39"}
+                });
+               //  var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "MyApi.xml");
+                // c.IncludeXmlComments(filePath);  
+            }
+            
+            );
+
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
