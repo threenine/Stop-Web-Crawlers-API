@@ -43,10 +43,10 @@ namespace api
                     Version = "v1" ,
                     Description = "Stop Web Crawlers Update API to enable the update of Referer Spammer Lists",
                     TermsOfService = "None",
-                    Contact = new Contact { Name = "threenine.co.uk", Email ="support@threenine.co.uk", Url ="https://twitter.com/threenine39"}
+                    Contact = new Contact { Name = "threenine.co.uk", Email ="support@threenine.co.uk", Url ="https://threenine.co.uk"}
                 });
-               //  var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "MyApi.xml");
-                // c.IncludeXmlComments(filePath);  
+                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
+                 c.IncludeXmlComments(filePath);  
             }
             
             );
