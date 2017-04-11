@@ -10,16 +10,26 @@ namespace api.Controllers
     public class ValuesController : Controller
     {
         /// <summary>
-        ///  Does something userful
+        ///  Returns a collection of values
         /// </summary>
+        ///<remarks>
+        /// This is a remark to add additional information about this method
+        ///  GET /get
+        /// {
+        ///    "value1", 
+        ///    "value2"
+        /// }
+        ///</remarks>
         [HttpGet("[action]")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
+        /// <summary>
+        ///  Returns an item from a collection of values based on ID
+        /// </summary>
+        [HttpGet("[action] {id}")]
         public string Get(int id)
         {
             return "value";

@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp1.1\api.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp1.1\SWCapi.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />

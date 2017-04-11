@@ -45,7 +45,7 @@ namespace api
                     TermsOfService = "None",
                     Contact = new Contact { Name = "threenine.co.uk", Email ="support@threenine.co.uk", Url ="https://threenine.co.uk"}
                 });
-                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
+                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "SWCapi.xml");
                  c.IncludeXmlComments(filePath);  
             }
             
