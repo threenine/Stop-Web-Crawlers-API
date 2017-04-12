@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace Portal.Database.Entity.Threats
+namespace Api.Database.Entity.Threats
 {
-  public class Status : BaseEntity
+    public class Status : BaseEntity
     {
         public Status()
         {
