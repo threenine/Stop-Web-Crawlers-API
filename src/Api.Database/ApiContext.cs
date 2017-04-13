@@ -17,6 +17,7 @@ namespace Api.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+           
             modelBuilder.HasDefaultSchema(schema: SchemaName.Portal);
             modelBuilder.Entity<Threat>();
             modelBuilder.Entity<ThreatType>();
