@@ -11,6 +11,9 @@ using Swashbuckle.AspNetCore;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.EntityFrameworkCore;
+using Api.Database;
+
 
 namespace api
 {
@@ -32,6 +35,7 @@ namespace api
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PortalDB")));
             services.AddMvc();
 
             services.AddSwaggerGen(c =>
@@ -66,6 +70,13 @@ namespace api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWC API V1");
             });
+
+             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetService<ApiContext>().Database.Migrate();
+                
+            }
+
         }
     }
 }
