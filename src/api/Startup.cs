@@ -15,7 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Api.Database;
 
 
-namespace api
+
+namespace Api
 {
     public class Startup
     {
@@ -40,22 +41,22 @@ namespace api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", 
-                new Info 
+                c.SwaggerDoc("v1",
+                new Info
                 {
-                    Title = "Stop Web Crawlers Update API", 
-                    Version = "v1" ,
+                    Title = "Stop Web Crawlers Update API",
+                    Version = "v1",
                     Description = "Stop Web Crawlers Update API to enable the update of Referer Spammer Lists",
                     TermsOfService = "None",
-                    Contact = new Contact { Name = "threenine.co.uk", Email ="support@threenine.co.uk", Url ="https://threenine.co.uk"}
+                    Contact = new Contact { Name = "threenine.co.uk", Email = "support@threenine.co.uk", Url = "https://threenine.co.uk" }
                 });
                 var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "SWCapi.xml");
-                 c.IncludeXmlComments(filePath);  
+                c.IncludeXmlComments(filePath);
             }
-            
+
             );
 
-         
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,10 +72,13 @@ namespace api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWC API V1");
             });
 
-             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<ApiContext>().Database.Migrate();
-                
+                if (!serviceScope.ServiceProvider.GetService<ApiContext>().AllMigrationsApplied())
+                {
+                    serviceScope.ServiceProvider.GetService<ApiContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<ApiContext>().EnsureSeeded();
+                }
             }
 
         }

@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Api.Database;
+using Api.Database.Entity.Threats;
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly ApiContext _context;
+
+        public ValuesController(ApiContext context)
+        {
+            _context = context;
+        }
+
         /// <summary>
         ///  Returns a collection of values
         /// </summary>
@@ -21,9 +30,9 @@ namespace api.Controllers
         /// }
         ///</remarks>
         [HttpGet("[action]")]
-        public IEnumerable<string> Get()
+        public IEnumerable<Threat> Get()
         {
-            return new string[] { "value1", "value2" };
+           return _context.Threats.AsEnumerable();
         }
 
         /// <summary>
