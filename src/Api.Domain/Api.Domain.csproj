@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Threenine.AutoMapperConfig\Threenine.AutoMapperConfig.csproj" />
+    <ProjectReference Include="..\Api.Database.Entity\Api.Database.Entity.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.0.2" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+</Project>

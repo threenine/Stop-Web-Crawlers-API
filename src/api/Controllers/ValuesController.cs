@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Api.Database;
 using Api.Database.Entity.Threats;
 
-namespace api.Controllers
+namespace Api.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller

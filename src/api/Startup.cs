@@ -13,6 +13,8 @@ using System.IO;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.EntityFrameworkCore;
 using Api.Database;
+using PhilosophicalMonkey;
+using Threenine.AutoMapperConfig;
 
 
 
@@ -80,6 +82,12 @@ namespace Api
                     serviceScope.ServiceProvider.GetService<ApiContext>().EnsureSeeded();
                 }
             }
+
+             //Set up code for automapper configuration 
+            var seedTypes = new Type[] { typeof(Api.Domain.Marker) };
+            var assemblies = Reflect.OnTypes.GetAssemblies(seedTypes);
+            var typesInAssemblies = Reflect.OnTypes.GetAllExportedTypes(assemblies);
+            MappingConfigurationFactory.LoadAllMappings(typesInAssemblies);
 
         }
     }
