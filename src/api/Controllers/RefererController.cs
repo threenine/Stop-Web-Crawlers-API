@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Api.Database;
 using Api.Database.Entity.Threats;
+using AutoMapper.QueryableExtensions;
+using Api.Domain.Bots;
 
 namespace Api.Controllers
 {
@@ -17,6 +19,12 @@ namespace Api.Controllers
         public RefererController (ApiContext context)
         {
             _context = context;
+        }
+
+          [HttpGet("[action]")]
+        public IEnumerable<Referer> Get()
+        {
+           return _context.Threats.ProjectTo<Referer>().AsEnumerable();
         }
     }
 
