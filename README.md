@@ -25,8 +25,15 @@ We'll make use of MS SQL in a Docker container for the Database server
   ```
         sudo docker pull microsoft/mssql-server-linux:latest
   ```
-
-
+ # Connect and Query
+ ```
+      sqlcmd -S localhost -U SA -P P@ssw0rd12 
+```
+ # Check Database exists
+  ```
+ SELECT Name from sys.Databases;
+GO
+ ```
 
 
 
