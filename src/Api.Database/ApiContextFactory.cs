@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 
 namespace Api.Database
 {
-public class ApiContextFactory : IDbContextFactory<ApiContext>
+public class ApiContextFactory : IDesignTimeDbContextFactory<ApiContext>
     {
-        public ApiContext Create(DbContextFactoryOptions options)
+        public ApiContextFactory()
         {
-           var builder = new DbContextOptionsBuilder<ApiContext>();
+        }
+
+
+        public ApiContext CreateDbContext(string[] args)
+        {
+            var builder = new DbContextOptionsBuilder<ApiContext>();
             builder.UseSqlServer(
                 "Server=(localdb)\\mssqllocaldb;Database=config;Trusted_Connection=True;MultipleActiveResultSets=true");
 

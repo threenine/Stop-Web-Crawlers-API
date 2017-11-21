@@ -49,8 +49,8 @@ namespace Api
             //Ensure we create initial Threat List
             if (!context.Threats.Any())
             {
-                List<Threat> threats = JsonConvert.DeserializeObject<List<Threat>>(File.ReadAllText(@"seed" + Path.DirectorySeparatorChar + "threats.json"));
-                context.Threats.AddRange(threats);
+                var threats = JsonConvert.DeserializeObject<List<Threat>>(File.ReadAllText(@"seed" + Path.DirectorySeparatorChar + "threats.json"));
+                context.AddRange(threats);
                 context.SaveChanges();
             }
         }

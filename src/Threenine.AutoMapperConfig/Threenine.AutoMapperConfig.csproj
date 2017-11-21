@@ -1,12 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="automapper" Version="5.2.0" />
-    <PackageReference Include="PhilosophicalMonkey" Version="1.2.0" />
+    <PackageReference Include="automapper" Version="6.2.1" />
+    <PackageReference Include="PhilosophicalMonkey" Version="1.4.0" />
   </ItemGroup>
-
 </Project>

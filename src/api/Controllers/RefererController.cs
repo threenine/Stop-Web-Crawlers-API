@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Api.Database;
-using Api.Database.Entity.Threats;
-using AutoMapper.QueryableExtensions;
 using Api.Domain.Bots;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Api.Controllers
 {
@@ -43,7 +37,7 @@ namespace Api.Controllers
        
         public IQueryable<Referer> Get()
         {
-           return _context.Threats.ProjectTo<Referer>().Where(x => x.Status == "Enabled").AsQueryable();
+           return _context.Threats.Where(x => x.Status.Name == $"Enabled").AsQueryable().ProjectTo<Referer>();
         }
        
         

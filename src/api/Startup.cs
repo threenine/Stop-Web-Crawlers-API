@@ -10,9 +10,9 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.EntityFrameworkCore;
 using Api.Database;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PhilosophicalMonkey;
 using Threenine.AutoMapperConfig;
 
@@ -54,9 +54,7 @@ namespace Api
                     TermsOfService = "None",
                     Contact = new Contact { Name = "threenine.co.uk", Email = "support@threenine.co.uk", Url = "https://threenine.co.uk" }
                 });
-                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "SWCapi.xml");
-                c.IncludeXmlComments(filePath);
-            }
+               }
 
             );
 
@@ -68,13 +66,7 @@ namespace Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            var options = new JwtBearerOptions
-            {
-                Audience = "https://swcapi.threenine.co.uk",
-                Authority = "https://swcapi.auth0.com/"
-            };
-            app.UseJwtBearerAuthentication(options);
-
+           
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>

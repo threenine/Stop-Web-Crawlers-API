@@ -1,19 +1,20 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
 using Api.Database.Entity.Threats;
 using Api.Database.Entity;
 using Portal.Core;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Database
 {
     public class ApiContext : DbContext
     {
         public ApiContext(DbContextOptions<ApiContext> options) : base(options) { }
-        public DbSet<Threat> Threats { get; set; }
-        public DbSet<ThreatType> Type { get; set; }
-        public DbSet<Status> Status { get; set; }
+        public ISet<Threat> Threats { get; set; }
+        public ISet<ThreatType> Type { get; set; }
+        public ISet<Status> Status { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
