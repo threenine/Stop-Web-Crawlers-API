@@ -10,7 +10,7 @@ using Api.Database.Entity.Threats;
 using Newtonsoft.Json;
 using Api.Database;
 
-namespace Api
+namespace swcApi
 {
     public static class DbContextExtension
     {

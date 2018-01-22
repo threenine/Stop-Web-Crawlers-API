@@ -1,78 +1,54 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.AspNetCore;
-using Swashbuckle.AspNetCore.Swagger;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
-using Api.Database;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using PhilosophicalMonkey;
-using Threenine.AutoMapperConfig;
+using swcApi;
+using Threenine.Map;
+using Api.Database;
+using Api.Database.Entity.Threats;
+using Swc.Service;
+using Threenine.Data;
+using Api.Domain.Bots;
 
-
-
-
-
-namespace Api
+namespace swc
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PortalDB")));
+            services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString(Globals.api_database_connection_string_name)));
+
+            services.AddScoped(typeof(IRepository<>), typeof( Repository<>));
+            services.AddTransient<IReferrerService, ReferrerService>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<DbContext, ApiContext>();
             services.AddMvc();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1",
-                new Info
-                {
-                    Title = "Stop Web Crawlers Update API",
-                    Version = "v1",
-                    Description = "Stop Web Crawlers Update API to enable the update of Referer Spammer Lists",
-                    TermsOfService = "None",
-                    Contact = new Contact { Name = "threenine.co.uk", Email = "support@threenine.co.uk", Url = "https://threenine.co.uk" }
-                });
-               }
-
-            );
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-           
-            app.UseMvc();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
+            if (env.IsDevelopment())
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWC API V1");
-            });
+                app.UseDeveloperExceptionPage();
+            }
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -87,8 +63,9 @@ namespace Api
             var seedTypes = new Type[] { typeof(Api.Domain.Marker) };
             var assemblies = Reflect.OnTypes.GetAssemblies(seedTypes);
             var typesInAssemblies = Reflect.OnTypes.GetAllExportedTypes(assemblies);
-            MappingConfigurationFactory.LoadAllMappings(typesInAssemblies);
-
+            MapConfigurationFactory.LoadAllMappings(typesInAssemblies);
+           
+            app.UseMvc();
         }
     }
 }

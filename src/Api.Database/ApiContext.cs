@@ -1,7 +1,7 @@
 ﻿using System;
 using Api.Database.Entity.Threats;
 using Api.Database.Entity;
-using Portal.Core;
+
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace Api.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            
-            modelBuilder.HasDefaultSchema(schema: SchemaName.Portal);
+            modelBuilder.HasDefaultSchema(schema: DBGlobals.SchemaName);
             modelBuilder.Entity<Threat>();
             modelBuilder.Entity<ThreatType>();
             modelBuilder.Entity<Status>();
@@ -30,17 +30,17 @@ namespace Api.Database
 
         public override int SaveChanges()
         {
-            AddAuitInfo();
+            Audit();
             return base.SaveChanges();
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            AddAuitInfo();
+         Audit();
             return await base.SaveChangesAsync();
         }
 
-        private void AddAuitInfo()
+        private void Audit()
         {
             var entries = ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
             foreach (var entry in entries)

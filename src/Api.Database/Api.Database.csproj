@@ -15,6 +15,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Api.Database.Entity\Api.Database.Entity.csproj" />
-    <ProjectReference Include="..\Portal.Core\Portal.Core.csproj" />
   </ItemGroup>
 </Project>
