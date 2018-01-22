@@ -18,7 +18,7 @@ using Swc.Service;
 using Threenine.Data;
 using Api.Domain.Bots;
 
-namespace swc
+namespace swcApi
 {
     public class Startup
     {
