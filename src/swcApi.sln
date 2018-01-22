@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "swcApi", "api\swcApi.csproj", "{AAFC007D-085C-43B0-AEA4-B39184EE9BE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "swcApi", "Api\swcApi.csproj", "{AAFC007D-085C-43B0-AEA4-B39184EE9BE5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Domain", "Api.Domain\Api.Domain.csproj", "{7418C14C-BD1D-4A81-9317-B5CEDB714DDF}"
 EndProject
