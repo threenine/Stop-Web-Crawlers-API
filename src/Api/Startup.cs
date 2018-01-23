@@ -26,7 +26,7 @@ namespace swcApi
         {
             Configuration = configuration;
         }
-
+        
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -55,8 +55,9 @@ namespace swcApi
                 if (!serviceScope.ServiceProvider.GetService<ApiContext>().AllMigrationsApplied())
                 {
                     serviceScope.ServiceProvider.GetService<ApiContext>().Database.Migrate();
-                    serviceScope.ServiceProvider.GetService<ApiContext>().EnsureSeeded();
+                    
                 }
+                serviceScope.ServiceProvider.GetService<ApiContext>().EnsureSeeded();
             }
 
             //Set up code for automapper configuration 

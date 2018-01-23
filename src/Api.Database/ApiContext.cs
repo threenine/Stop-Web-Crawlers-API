@@ -12,9 +12,9 @@ namespace Api.Database
     public class ApiContext : DbContext
     {
         public ApiContext(DbContextOptions<ApiContext> options) : base(options) { }
-        public ISet<Threat> Threats { get; set; }
-        public ISet<ThreatType> Type { get; set; }
-        public ISet<Status> Status { get; set; }
+        public DbSet<Threat> Threats { get; set; }
+        public DbSet<ThreatType> Type { get; set; }
+        public DbSet<Status> Status { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
