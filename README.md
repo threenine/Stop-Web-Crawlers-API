@@ -33,7 +33,16 @@ We'll make use of MS SQL in a Docker container for the Database server
   ```
  SELECT Name from sys.Databases;
 GO
+ 
  ```
+# Development DB Connection String
+
+For development purposes set the appsettings.Development.json to
+```
+"ConnectionStrings": {
+    "PortalDB": "Data Source=localhost;Initial Catalog=portal;User Id=sa;Password=P@ssw0rd12;Integrated Security=false;MultipleActiveResultSets=True;"
+```
+This is will make use of the Docker DB
 
 
 
