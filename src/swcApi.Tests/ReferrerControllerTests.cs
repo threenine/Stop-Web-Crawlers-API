@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Api.Domain.Bots;
 using FizzWare.NBuilder;
 using Moq;
@@ -29,5 +30,22 @@ namespace swcApi.Tests
             Assert.IsAssignableFrom<IEnumerable<Referer>>(values);
 
         }
+        [Fact]
+        public void ShouldReturnNull()
+        {
+           
+            var referrerServiceMock = new Mock<IReferrerService>();
+            referrerServiceMock.Setup(service => service.GetAll());
+               
+
+            var controller = new ReferrerController(referrerServiceMock.Object);
+            var values = controller.Get();
+
+            Assert.Null(values);
+           
+
+        }
+
+
     }
 }
