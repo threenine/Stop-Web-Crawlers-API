@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Database.Entity", "Api.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Database", "Api.Database\Api.Database.csproj", "{C60B5FD6-D850-474D-8B59-9A312F7381AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swc.Service", "Swc.Service\Swc.Service.csproj", "{8E477D58-8C3F-4189-AEBD-B991C77C033D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Swc.Service", "Swc.Service\Swc.Service.csproj", "{8E477D58-8C3F-4189-AEBD-B991C77C033D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6302C8BF-ED62-464C-90C2-B35B65711922}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "swcApi.Tests", "swcApi.Tests\swcApi.Tests.csproj", "{B36CCD09-D865-45CC-9FD3-2A6DB8476C19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{8E477D58-8C3F-4189-AEBD-B991C77C033D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E477D58-8C3F-4189-AEBD-B991C77C033D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E477D58-8C3F-4189-AEBD-B991C77C033D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B36CCD09-D865-45CC-9FD3-2A6DB8476C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B36CCD09-D865-45CC-9FD3-2A6DB8476C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B36CCD09-D865-45CC-9FD3-2A6DB8476C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B36CCD09-D865-45CC-9FD3-2A6DB8476C19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B36CCD09-D865-45CC-9FD3-2A6DB8476C19} = {6302C8BF-ED62-464C-90C2-B35B65711922}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E1EDFA2-04DB-4075-806B-548493C2475D}
