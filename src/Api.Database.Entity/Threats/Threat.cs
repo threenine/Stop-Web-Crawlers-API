@@ -49,15 +49,11 @@ namespace Api.Database.Entity.Threats
         public string QueryString { get; set; }
 
         public string Protocol { get; set; }
-
-        [ForeignKey("Status")]
-        public int StatusId { get; set; }
-
-        [ForeignKey("Type")]
+        
         public int TypeId { get; set; }
-
-        public virtual ThreatType Type { get; set; }
-        public virtual Status Status { get; set; }
+        public int StatusId { get; set; }
+        public ThreatType Type { get; set; }
+        public  Status Status { get; set; }
 
 
     }

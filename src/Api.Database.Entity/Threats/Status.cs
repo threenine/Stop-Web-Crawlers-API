@@ -7,7 +7,6 @@ namespace Api.Database.Entity.Threats
     {
         public Status()
         {
-            Threats = new List<Threat>();
         }
 
         [Required]
@@ -18,6 +17,6 @@ namespace Api.Database.Entity.Threats
         public string  Description { get; set; }
 
 
-        public virtual ICollection<Threat> Threats { get; set; }
+        public ICollection<Threat> Threats { get; set; }
     }
 }

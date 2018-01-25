@@ -16,7 +16,7 @@ namespace swcApi.Tests
     public class ReferrerControllerTests
     {
         [Fact]
-        public void ShouldReturnListOfReferrers()
+        public void Get_Should_Return_List_Of_Referrers()
         {
             var referrerList = Builder<Referer>.CreateListOfSize(20).Build().AsEnumerable();
             var referrerServiceMock = new Mock<IReferrerService>();
@@ -30,21 +30,18 @@ namespace swcApi.Tests
             Assert.IsAssignableFrom<IEnumerable<Referer>>(values);
 
         }
+
         [Fact]
-        public void ShouldReturnNull()
+        public void Get_Should_Return_Null()
         {
-           
-            var referrerServiceMock = new Mock<IReferrerService>();
+           var referrerServiceMock = new Mock<IReferrerService>();
             referrerServiceMock.Setup(service => service.GetAll());
-               
 
             var controller = new ReferrerController(referrerServiceMock.Object);
             var values = controller.Get();
 
             Assert.Null(values);
-           
-
-        }
+         }
 
 
     }

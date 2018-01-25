@@ -5,10 +5,9 @@ namespace Api.Database.Entity.Threats
 {
     public class ThreatType : BaseEntity
     {
-
         public ThreatType()
         {
-            Threats = new List<Threat>();
+          
         }
 
         [Required]
@@ -19,6 +18,6 @@ namespace Api.Database.Entity.Threats
             set;
         }
 
-        public virtual ICollection<Threat> Threats { get; set; }
+        public ICollection<Threat> Threats { get; set; }
     }
 }
