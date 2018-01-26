@@ -25,13 +25,13 @@ namespace Swc.Service
         }
         public IEnumerable<Referer> GetAllActive()
         {
-            var threats = _refererRepository.Get(x => x.Status.Name == Enabled && x.Type.Name == Referer)
-                .Join(_statusRepository.Get(), t => t.StatusId, s => s.Id, (t, s) => new {t, s})
-                .Join(_typeRepository.Get(), tt => tt.t.TypeId, type => type.Id,
-                    (t1, type) =>
+            var threats = _refererRepository.Get(predicate: x => x.Status.Name == Enabled && x.Type.Name == Referer)
+                .Join(inner: _statusRepository.Get(), outerKeySelector: t => t.StatusId, innerKeySelector: s => s.Id, resultSelector: (t, s) => new {t, s})
+                .Join(inner: _typeRepository.Get(), outerKeySelector: tt => tt.t.TypeId, innerKeySelector: type => type.Id,
+                    resultSelector: (t1, type) =>
                         new Threat {Name = @t1.t.Name, Referer = @t1.t.Referer, Type = type, Status = @t1.s});
 
-            return Mapper.Map<IEnumerable<Referer>>(threats);
+            return Mapper.Map<IEnumerable<Referer>>(source: threats);
           
         }
     }
