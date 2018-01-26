@@ -21,7 +21,7 @@ namespace swcApi.Controllers
         }
         public IEnumerable<Referer> Get()
         {
-            return _referrerService.GetAll();
+            return _referrerService.GetAllActive();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Swc.Service
 {
     public interface IReferrerService
     {
-        IEnumerable<Referer> GetAll();
+        IEnumerable<Referer> GetAllActive();
 
     }
 }
