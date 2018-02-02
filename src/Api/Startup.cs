@@ -9,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using PhilosophicalMonkey;
 using swcApi;
 using Threenine.Map;
 using Api.Database;
@@ -61,10 +60,8 @@ namespace swcApi
             }
 
             //Set up code for automapper configuration 
-            var seedTypes = new Type[] { typeof(Api.Domain.Marker) };
-            var assemblies = Reflect.OnTypes.GetAssemblies(seedTypes);
-            var typesInAssemblies = Reflect.OnTypes.GetAllExportedTypes(assemblies);
-            MapConfigurationFactory.LoadAllMappings(typesInAssemblies);
+          
+            MapConfigurationFactory.Scan<Startup>();
            
             app.UseMvc();
         }

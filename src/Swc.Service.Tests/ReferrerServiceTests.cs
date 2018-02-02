@@ -6,7 +6,6 @@ using Api.Database.Entity.Threats;
 using Api.Domain.Bots;
 using FizzWare.NBuilder;
 using Moq;
-using PhilosophicalMonkey;
 using Threenine.Data;
 using Threenine.Map;
 using Xunit;
@@ -17,10 +16,7 @@ namespace Swc.Service.Tests
     {
         public ReferrerServiceTests()
         {
-            var seedTypes = new Type[] { typeof(Api.Domain.Marker) };
-            var assemblies = Reflect.OnTypes.GetAssemblies(seedTypes);
-            var typesInAssemblies = Reflect.OnTypes.GetAllExportedTypes(assemblies);
-            MapConfigurationFactory.LoadAllMappings(typesInAssemblies);
+          MapConfigurationFactory.Scan<ReferrerServiceTests>();
         }
 
         [Fact]

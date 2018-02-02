@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Threenine.Data" Version="1.0.0" />
-    <PackageReference Include="Threenine.Map" Version="1.0.0" />
+    <PackageReference Include="Threenine.Data" Version="1.0.3" />
+    <PackageReference Include="Threenine.Map" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
