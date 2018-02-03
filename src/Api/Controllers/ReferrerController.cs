@@ -23,5 +23,18 @@ namespace swcApi.Controllers
         {
             return _referrerService.GetAllActive();
         }
+        [HttpPost]
+        public IActionResult Create([FromBody] Referer referer)
+        {
+            if (referer == null)
+            {
+                return BadRequest();
+            }
+           
+            _referrerService.Insert(referer);
+            
+
+            return CreatedAtRoute("referer", new {  referer = referer.Name }, referer);
+        }
     }
 }

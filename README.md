@@ -35,6 +35,12 @@ We'll make use of MS SQL in a Docker container for the Database server
 GO
  
  ```
+# Stop Docker Container
+
+```
+      docker container [container id]
+```
+
 # Development DB Connection String
 
 For development purposes set the appsettings.Development.json to

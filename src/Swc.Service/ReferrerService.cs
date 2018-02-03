@@ -34,5 +34,20 @@ namespace Swc.Service
             return Mapper.Map<IEnumerable<Referer>>(source: threats);
           
         }
+
+        public bool  Insert(Referer referer)
+        {
+            var refType = _typeRepository.Get(x => x.Name == "Referer").SingleOrDefault();
+            var status = _statusRepository.Get(x=> x.Name == "Moderation").SingleOrDefault();
+
+            var threat = Mapper.Map<Threat>(referer);
+
+            threat.StatusId =  status.Id;
+            threat.TypeId = refType.Id;
+
+            _refererRepository.Add(threat);
+            return true;
+
+        }
     }
 }
