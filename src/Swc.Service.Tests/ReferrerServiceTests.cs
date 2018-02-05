@@ -12,11 +12,13 @@ using Xunit;
 
 namespace Swc.Service.Tests
 {
-    public class ReferrerServiceTests
+    public class ReferrerServiceTests :  IClassFixture<ServiceTestFixture>, IDisposable
     {
-        public ReferrerServiceTests()
+        private readonly ServiceTestFixture _serviceFixture;
+        public ReferrerServiceTests(ServiceTestFixture fixture)
         {
-          MapConfigurationFactory.Scan<ReferrerServiceTests>();
+            _serviceFixture = fixture;
+         
         }
 
         [Fact]
@@ -26,14 +28,9 @@ namespace Swc.Service.Tests
             var typeRepositoryMock = new Mock<IRepository<ThreatType>>();
             var statusRepositoryMock = new Mock<IRepository<Status>>();
 
-            var threats = Builder<Threat>.CreateListOfSize(10).All().With(t => t.TypeId = 1)
-                .With(t => t.StatusId = 1).Build().AsEnumerable();
-            var types = Builder<ThreatType>.CreateListOfSize(3).TheFirst(1).With(x => x.Id = 1).Build().AsEnumerable();
-            var status = Builder<Status>.CreateListOfSize(4).TheFirst(1).With(x => x.Id = 1).Build().AsEnumerable();
-
-            threatRepositoryMock.Setup(x => x.Get(It.IsAny<Expression<Func<Threat,bool>>>())).Returns(threats);
-            typeRepositoryMock.Setup(x => x.Get()).Returns(types);
-            statusRepositoryMock.Setup(x => x.Get()).Returns(status);
+            threatRepositoryMock.Setup(x => x.Get(It.IsAny<Expression<Func<Threat,bool>>>())).Returns(_serviceFixture.ThreatList);
+            typeRepositoryMock.Setup(x => x.Get()).Returns(_serviceFixture.ThreatTypes);
+            statusRepositoryMock.Setup(x => x.Get()).Returns(_serviceFixture.Statuses);
 
             var service = new ReferrerService(threatRepositoryMock.Object, statusRepositoryMock.Object,
                 typeRepositoryMock.Object);
@@ -43,6 +40,11 @@ namespace Swc.Service.Tests
             Assert.Equal(10, referers.Count());
             Assert.IsAssignableFrom<IEnumerable<Referer>>(referers);
 
+        }
+
+        public void Dispose()
+        {
+            _serviceFixture?.Dispose();
         }
     }
 }
