@@ -34,7 +34,7 @@ namespace swcApi.Controllers
             _referrerService.Insert(referer);
             
 
-            return CreatedAtRoute("referer", new {  referer = referer.Name }, referer);
+            return CreatedAtRoute("referrer", new {  referer = referer.Name }, referer);
         }
     }
 }

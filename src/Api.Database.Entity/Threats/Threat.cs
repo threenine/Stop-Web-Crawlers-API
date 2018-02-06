@@ -52,8 +52,12 @@ namespace Api.Database.Entity.Threats
         
         public int TypeId { get; set; }
         public int StatusId { get; set; }
-        public ThreatType Type { get; set; }
-        public  Status Status { get; set; }
+
+        [ForeignKey("TypeId")]
+        public virtual ThreatType ThreatType { get; set; }
+
+        [ForeignKey("StatusId")]
+        public virtual  Status Status { get; set; }
 
 
     }

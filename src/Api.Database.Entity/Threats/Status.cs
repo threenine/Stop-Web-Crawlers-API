@@ -17,6 +17,6 @@ namespace Api.Database.Entity.Threats
         public string  Description { get; set; }
 
 
-        public ICollection<Threat> Threats { get; set; }
+        public virtual ICollection<Threat> Threats { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Api.Domain.Bots
                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                  .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Referer))
                  .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.Name))
-                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type.Name))
+                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.ThreatType.Name))
                 .ReverseMap();
         }
     }

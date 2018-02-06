@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
+using System;
+using System.Collections.Generic;
 
 namespace Api.Database.Migrations
 {
-    public partial class init : Migration
+    public partial class initial_release : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
