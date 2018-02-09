@@ -1,67 +1,62 @@
 [
   {
-     "name":"00server.com"
-    ,"referer":"00server.com"
+    "referer":"00server.com"
     ,"typeId":"1"
     ,"statusId":"1"
   },
   {
-     "name":"0n-line.tv"
-    ,"referer":"0n-line.tv"
+   
+    "referer":"0n-line.tv"
     ,"typeId":"1"
     ,"statusId":"1"
   },
   {
-     "name":"100dollars-seo.com"
-    ,"referer":"100dollars-seo.com"
+   
+    "referer":"100dollars-seo.com"
     ,"typeId":"1"
     ,"statusId":"1"
   },
   {
-     "name":"100ssul.com"
-    ,"referer":"100ssul.com"
+    
+    "referer":"100ssul.com"
     ,"typeId":"1"
     ,"statusId":"1"
   },
   {
-     "name":"10webs.org"
-    ,"referer":"10webs.org"
+    
+    "referer":"10webs.org"
     ,"typeId":"1"
     ,"statusId":"1"
   },
   {
-     "name":"1185158.responsive-test.net"
-    ,"referer":"1185158.responsive-test.net"
+    "referer":"1185158.responsive-test.net"
     ,"typeId":"1"
     ,"statusId":"1"
   },
   {
-     "name":"1222231.responsive-test.net"
-    ,"referer":"1222231.responsive-test.net"
+     "referer":"1222231.responsive-test.net"
     ,"typeId":"1"
     ,"statusId":"1"
   },
   {
-     "name":"12287457.responsive-test.net"
-    ,"referer":"12287457.responsive-test.net"
+    "referer":"12287457.responsive-test.net"
     ,"typeId":"1"
     ,"statusId":"1"
   },
   {
-     "name":"12masterov.com"
-    ,"referer":"12masterov.com"
+    "referer":"12masterov.com"
     ,"typeId":"1"
     ,"statusId":"1"
   },
   {
-     "name":"1541.ru"
-    ,"referer":"1541.ru"
+    
+    "referer":"1541.ru"
     ,"typeId":"1"
     ,"statusId":"1"
-  },
-  {
-     "name":"15874552.responsive-test.net"
-    ,"referer":"15874552.responsive-test.net"
+  }
+ /* {
+   
+   ,"referer":"15874552.responsive-test.net"
     ,"typeId":"1"
     ,"statusId":"1"
   },
@@ -8631,5 +8626,5 @@
      "name":"яндех-херня.рф"
     ,"referer":"яндех-херня.рф"
     ,"typeId":"1"
-    ,"statusId":"1"
-  }]
+    ,"statusId":"1" 
+  }*/]

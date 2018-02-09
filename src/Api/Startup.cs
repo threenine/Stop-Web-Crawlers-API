@@ -54,9 +54,9 @@ namespace swcApi
                 if (!serviceScope.ServiceProvider.GetService<ApiContext>().AllMigrationsApplied())
                 {
                     serviceScope.ServiceProvider.GetService<ApiContext>().Database.Migrate();
-                    
+                    serviceScope.ServiceProvider.GetService<ApiContext>().EnsureSeeded();
                 }
-                serviceScope.ServiceProvider.GetService<ApiContext>().EnsureSeeded();
+               
             }
 
             //Set up code for automapper configuration 

@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Api.Database.Entity.Threats;
 using AutoMapper;
 using Threenine.Map;
@@ -8,7 +9,7 @@ namespace Api.Domain.Bots
 {
  public class Referer   : ICustomMap
     {
-        public string Name { get; set; }
+        public string Id { get; set; }
         public string Url { get; set; }
         public string Type { get; set; }
         public string Status { get; set; }
@@ -16,13 +17,28 @@ namespace Api.Domain.Bots
         public void CustomMap(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Threat, Referer>()
-                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                  .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Referer))
-                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.Name))
-                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.ThreatType.Name))
+                 .ForMember(dest => dest.Status, opt => opt.ResolveUsing<StatusResolver>())
+                 .ForMember(dest => dest.Type, opt => opt.ResolveUsing<ThreatTypeResolver>())
                 .ReverseMap();
         }
+
+     }
+
+   public class StatusResolver : IValueResolver<Threat, Referer , string>
+    {
+        public string Resolve(Threat source, Referer destination, string destMember, ResolutionContext context)
+        {
+            return source.Status.Name;
+        }
     }
-    
+
+    public class ThreatTypeResolver : IValueResolver<Threat, Referer, string>
+    {
+        public string Resolve(Threat source, Referer destination, string destMember, ResolutionContext context)
+        {
+            return source.Status.Name;
+        }
+    }
 }
 

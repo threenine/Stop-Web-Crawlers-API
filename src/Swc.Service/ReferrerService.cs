@@ -31,7 +31,7 @@ namespace Swc.Service
                 .Join(inner: _statusRepository.Get(), outerKeySelector: t => t.StatusId, innerKeySelector: s => s.Id, resultSelector: (t, s) => new {t, s})
                 .Join(inner: _typeRepository.Get(), outerKeySelector: tt => tt.t.TypeId, innerKeySelector: type => type.Id,
                     resultSelector: (t1, type) =>
-                        new Threat {Name = @t1.t.Name, Referer = @t1.t.Referer, ThreatType = type, Status = @t1.s});
+                        new Threat { Referer = @t1.t.Referer, ThreatType = type, Status = @t1.s});
 
             return Mapper.Map<IEnumerable<Referer>>(source: threats);
           

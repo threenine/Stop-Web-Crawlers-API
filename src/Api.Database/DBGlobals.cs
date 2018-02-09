@@ -6,6 +6,7 @@ namespace Api.Database
 {
  public static  class DBGlobals
  {
-    public const string SchemaName = "Portal";
+    public const string SchemaName = "swc";
+     public const string IdentifierFormat = " swc- ";
  }
 }

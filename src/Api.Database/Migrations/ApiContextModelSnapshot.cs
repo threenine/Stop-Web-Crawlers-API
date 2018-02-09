@@ -17,7 +17,7 @@ namespace Api.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Portal")
+                .HasDefaultSchema("swc")
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -49,16 +49,13 @@ namespace Api.Database.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(255);
-
                     b.Property<string>("Host");
 
-                    b.Property<DateTime>("Modified");
+                    b.Property<string>("Identifier")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasComputedColumnSql("CONCAT(' swc- ' , [Id])");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("Modified");
 
                     b.Property<string>("Protocol");
 

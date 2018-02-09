@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace Api.Database.Migrations
 {
-    public partial class initial_release : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Portal");
+                name: "swc");
 
             migrationBuilder.CreateTable(
                 name: "Status",
-                schema: "Portal",
+                schema: "swc",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -31,7 +31,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Type",
-                schema: "Portal",
+                schema: "swc",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -47,16 +47,15 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Threats",
-                schema: "Portal",
+                schema: "swc",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Created = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(maxLength: 255, nullable: true),
                     Host = table.Column<string>(nullable: true),
+                    Identifier = table.Column<string>(nullable: true, computedColumnSql: "CONCAT(' swc- ' , [Id])"),
                     Modified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
                     Protocol = table.Column<string>(nullable: true),
                     QueryString = table.Column<string>(nullable: true),
                     Referer = table.Column<string>(maxLength: 255, nullable: true),
@@ -72,14 +71,14 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_Threats_Status_StatusId",
                         column: x => x.StatusId,
-                        principalSchema: "Portal",
+                        principalSchema: "swc",
                         principalTable: "Status",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Threats_Type_TypeId",
                         column: x => x.TypeId,
-                        principalSchema: "Portal",
+                        principalSchema: "swc",
                         principalTable: "Type",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -87,13 +86,13 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Threats_StatusId",
-                schema: "Portal",
+                schema: "swc",
                 table: "Threats",
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Threats_TypeId",
-                schema: "Portal",
+                schema: "swc",
                 table: "Threats",
                 column: "TypeId");
         }
@@ -102,15 +101,15 @@ namespace Api.Database.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Threats",
-                schema: "Portal");
+                schema: "swc");
 
             migrationBuilder.DropTable(
                 name: "Status",
-                schema: "Portal");
+                schema: "swc");
 
             migrationBuilder.DropTable(
                 name: "Type",
-                schema: "Portal");
+                schema: "swc");
         }
     }
 }
