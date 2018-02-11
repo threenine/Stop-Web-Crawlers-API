@@ -31,10 +31,16 @@ namespace swcApi.Controllers
                 return BadRequest();
             }
            
-            _referrerService.Insert(referer);
+           var identifier =  _referrerService.Insert(referer);
             
 
-            return CreatedAtRoute("referrer", new {  referer = referer.Id }, referer);
+            return CreatedAtRoute("Detail", new {  referer = identifier }, referer);
+        }
+
+        [HttpGet]
+        public Referer Detail(string identifier)
+        {
+            return _referrerService.GetReferer(identifier);
         }
     }
 }

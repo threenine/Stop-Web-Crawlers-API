@@ -10,26 +10,23 @@ namespace Swc.Service
 {
     public class ReferrerService : IReferrerService
     {
-        private readonly IRepository<Threat> _refererRepository;
-        private readonly IRepository<Status> _statusRepository;
-        private readonly IRepository<ThreatType> _typeRepository;
+      
         private readonly IUnitOfWork _unitOfWork;
 
         private const string Enabled = "Enabled";
         private const string Referer = "Referer";
+        private const string Moderate = "Moderate";
 
-        public ReferrerService(IRepository<Threat> repository, IRepository<Status> statusRepository, IRepository<ThreatType> typeRepository, IUnitOfWork unitOfWork)
+        public ReferrerService(IUnitOfWork unitOfWork)
         {
-            _refererRepository = repository;
-            _statusRepository = statusRepository;
-            _typeRepository = typeRepository;
+           
             _unitOfWork = unitOfWork;
         }
         public IEnumerable<Referer> GetAllActive()
         {
-            var threats = _refererRepository.Get(predicate: x => x.Status.Name == Enabled && x.ThreatType.Name == Referer)
-                .Join(inner: _statusRepository.Get(), outerKeySelector: t => t.StatusId, innerKeySelector: s => s.Id, resultSelector: (t, s) => new {t, s})
-                .Join(inner: _typeRepository.Get(), outerKeySelector: tt => tt.t.TypeId, innerKeySelector: type => type.Id,
+            var threats = _unitOfWork.GetRepository<Threat>().Get(predicate: x => x.Status.Name == Enabled && x.ThreatType.Name == Referer)
+                .Join(inner: _unitOfWork.GetRepository<Status>().Get(), outerKeySelector: t => t.StatusId, innerKeySelector: s => s.Id, resultSelector: (t, s) => new {t, s})
+                .Join(inner: _unitOfWork.GetRepository<ThreatType>().Get(), outerKeySelector: tt => tt.t.TypeId, innerKeySelector: type => type.Id,
                     resultSelector: (t1, type) =>
                         new Threat { Referer = @t1.t.Referer, ThreatType = type, Status = @t1.s});
 
@@ -37,10 +34,10 @@ namespace Swc.Service
           
         }
 
-        public bool  Insert(Referer referer)
+        public string  Insert(Referer referer)
         {
-            var refType = _typeRepository.Get(x => x.Name == "Referer").SingleOrDefault();
-            var status = _statusRepository.Get(x=> x.Name == "Moderate").SingleOrDefault();
+            var refType =_unitOfWork.GetRepository<ThreatType>().Get(x => x.Name == Referer).SingleOrDefault();
+            var status = _unitOfWork.GetRepository<Status>().Get(x=> x.Name == Moderate).SingleOrDefault();
 
             var threat = Mapper.Map<Threat>(referer);
 
@@ -48,12 +45,19 @@ namespace Swc.Service
             threat.TypeId = refType.Id;
             threat.ThreatType = refType;
             threat.Status = status;
+            //var repo = _unitOfWork.
+            _unitOfWork.GetRepository<Threat>().Add(threat);
+            _unitOfWork.SaveChanges();
 
-            _refererRepository.Add(threat);
-            _unitOfWork.Commit();
+            return threat.Identifier;
 
-            return true;
+        }
 
+        public Referer GetReferer(string identifier)
+        {
+            var threat = _unitOfWork.GetRepository<Threat>().Get(x => x.Identifier == identifier).SingleOrDefault();
+
+            return Mapper.Map<Referer>(threat);
         }
     }
 }

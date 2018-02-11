@@ -16,6 +16,7 @@ using Api.Database.Entity.Threats;
 using Swc.Service;
 using Threenine.Data;
 using Api.Domain.Bots;
+using Threenine.Data.DependencyInjection;
 
 namespace swcApi
 {
@@ -32,12 +33,9 @@ namespace swcApi
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString(Globals.api_database_connection_string_name)));
-
-            services.AddScoped(typeof(IRepository<>), typeof( Repository<>));
+            services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString(Globals.api_database_connection_string_name))).AddUnitOfWork<ApiContext>();
             services.AddTransient<IReferrerService, ReferrerService>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<DbContext, ApiContext>();
+         
             services.AddMvc();
         }
 

@@ -6,7 +6,8 @@ namespace Swc.Service
     public interface IReferrerService
     {
         IEnumerable<Referer> GetAllActive();
-        bool Insert(Referer referer);
+        string Insert(Referer referer);
+        Referer GetReferer(string identifier);
 
     }
 }
