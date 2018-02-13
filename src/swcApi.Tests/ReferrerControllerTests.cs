@@ -18,7 +18,7 @@ namespace swcApi.Tests
         [Fact]
         public void Get_Should_Return_List_Of_Referrers()
         {
-            var referrerList = Builder<Referer>.CreateListOfSize(20).Build().AsEnumerable();
+            var referrerList = Builder<Referrer>.CreateListOfSize(20).Build().AsEnumerable();
             var referrerServiceMock = new Mock<IReferrerService>();
             referrerServiceMock.Setup(service => service.GetAllActive())
                 .Returns(referrerList);
@@ -27,7 +27,7 @@ namespace swcApi.Tests
             var values = controller.Get();
 
             Assert.Equal(20, values.Count());
-            Assert.IsAssignableFrom<IEnumerable<Referer>>(values);
+            Assert.IsAssignableFrom<IEnumerable<Referrer>>(values);
 
         }
 

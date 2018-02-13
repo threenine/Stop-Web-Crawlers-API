@@ -35,7 +35,7 @@ namespace swcApi.Controllers
         /// }
         ///</remarks>
         [HttpGet]
-        public IEnumerable<Referer> Get()
+        public IEnumerable<Referrer> Get()
         {
             return _referrerService.GetAllActive();
         }
@@ -53,17 +53,17 @@ namespace swcApi.Controllers
         /// }
         ///</remarks>
         [HttpPost]
-        public IActionResult Post([FromBody] Referer referer)
+        public IActionResult Post([FromBody] Referrer referrer)
         {
-            if (referer == null)
+            if (referrer == null)
             {
                 return BadRequest();
             }
            
-           var identifier =  _referrerService.Insert(referer);
+           var identifier =  _referrerService.Insert(referrer);
             
 
-            return CreatedAtRoute("Detail", new {  referer = identifier }, referer);
+            return CreatedAtRoute("Detail", new {  referer = identifier }, referrer);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace swcApi.Controllers
         /// }
         ///</remarks>
         [HttpGet("{identifier}")]
-        public Referer Detail(string identifier)
+        public Referrer Detail(string identifier)
         {
             return _referrerService.GetReferer(identifier);
         }
