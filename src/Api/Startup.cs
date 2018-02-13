@@ -17,6 +17,10 @@ using Swc.Service;
 using Threenine.Data;
 using Api.Domain.Bots;
 using Threenine.Data.DependencyInjection;
+using Swashbuckle.AspNetCore;
+using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace swcApi
 {
@@ -37,8 +41,23 @@ namespace swcApi
             services.AddTransient<IReferrerService, ReferrerService>();
          
             services.AddMvc();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", 
+                new Info 
+                {
+                    Title = "Stop Web Crawlers API", 
+                    Version = "v1" ,
+                    Description = "Stop Web Crawlers API to enable the update of Referer Spammer Lists",
+                    TermsOfService = "None",
+                    Contact = new Contact { Name = "threenine.co.uk", Email ="support@threenine.co.uk", Url ="https://threenine.co.uk"}
+                });
+                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
+                 c.IncludeXmlComments(filePath);  
+            }
+          );
         }
-
+       
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -47,6 +66,13 @@ namespace swcApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMvc();
+            app.UseStaticFiles();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWC API V1");
+            });
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 if (!serviceScope.ServiceProvider.GetService<ApiContext>().AllMigrationsApplied())
@@ -58,10 +84,9 @@ namespace swcApi
             }
 
             //Set up code for automapper configuration 
-          
-            MapConfigurationFactory.Scan<Startup>();
+           MapConfigurationFactory.Scan<Startup>();
            
-            app.UseMvc();
+           
         }
     }
 }
