@@ -78,7 +78,7 @@ namespace swcApi.Controllers
         /// }
         ///</remarks>
         [HttpGet]
-        [Route("api/referrer/{identifier}", Name = "Detail")]
+        [Route("{identifier}", Name = "Detail")]
         public IActionResult Detail(string identifier)
         {
             var referer=  _referrerService.GetReferer(identifier);
