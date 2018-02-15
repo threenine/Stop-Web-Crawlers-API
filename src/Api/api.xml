@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>swcApi</name>
+    </assembly>
+    <members>
+        <member name="T:swcApi.Controllers.ReferrerController">
+            <inheritdoc />
+        </member>
+        <member name="M:swcApi.Controllers.ReferrerController.#ctor(Swc.Service.IReferrerService)">
+            <inheritdoc />
+        </member>
+        <member name="M:swcApi.Controllers.ReferrerController.Get">
+             <summary>
+              Returns a list of all active referrer spammers
+             </summary>
+            <remarks>
+             This is a remark to add additional information about this method
+              GET /get
+             {
+                "value1", 
+                "value2"
+             }
+            </remarks>
+        </member>
+        <member name="M:swcApi.Controllers.ReferrerController.Post(Api.Domain.Bots.Referrer)">
+             <summary>
+              Returns a collection of values
+             </summary>
+            <remarks>
+             This is a remark to add additional information about this method
+              GET /get
+             {
+                "value1", 
+                "value2"
+             }
+            </remarks>
+        </member>
+        <member name="M:swcApi.Controllers.ReferrerController.Detail(System.String)">
+             <summary>
+              Returns a collection of values
+             </summary>
+            <remarks>
+             This is a remark to add additional information about this method
+              GET /get
+             {
+                "value1", 
+                "value2"
+             }
+            </remarks>
+        </member>
+    </members>
+</doc>

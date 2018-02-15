@@ -19,7 +19,7 @@ namespace Api.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            
-            modelBuilder.HasDefaultSchema(schema: DBGlobals.SchemaName);
+           // modelBuilder.HasDefaultSchema(schema: DBGlobals.SchemaName);
             modelBuilder.Entity<Threat>().Property(p => p.Identifier).HasComputedColumnSql("CONCAT('" + DBGlobals.IdentifierFormat + "' , [Id])");
             modelBuilder.Entity<ThreatType>();
             modelBuilder.Entity<Status>();

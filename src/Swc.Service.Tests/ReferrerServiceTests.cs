@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Api.Database;
 using Api.Database.Entity.Threats;
 using Api.Domain.Bots;
 using FizzWare.NBuilder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Internal;
 using Moq;
 using Threenine.Data;
 using Threenine.Map;
@@ -24,15 +27,14 @@ namespace Swc.Service.Tests
         [Fact]
         public void Should_Return_Referrer_Enumerable()
         {
-          
-            //var uow = Mock < IUnitOfWork<T>();
 
-            //var service = new ReferrerService();
+            var unit = new UnitOfWork<ApiContext>(_serviceFixture.Context);
+         
+            var service = new ReferrerService(unit);
+            var referers = service.GetAllActive();
 
-            //var referers = service.GetAllActive();
-
-            //Assert.Equal(10, referers.Count());
-            //Assert.IsAssignableFrom<IEnumerable<Referer>>(referers);
+            Assert.Equal(10, referers.Count());
+            Assert.IsAssignableFrom<IEnumerable<Referrer>>(referers);
 
         }
 

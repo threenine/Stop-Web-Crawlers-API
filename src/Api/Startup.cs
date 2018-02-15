@@ -37,7 +37,8 @@ namespace swcApi
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString(Globals.api_database_connection_string_name))).AddUnitOfWork<ApiContext>();
+            services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString(Globals.api_database_connection_string_name)))
+                .AddUnitOfWork<ApiContext>();
             services.AddTransient<IReferrerService, ReferrerService>();
          
             services.AddMvc();

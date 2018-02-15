@@ -6,7 +6,8 @@
     <StartupObject>swcApi.Program</StartupObject>
    </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.0\api.xml</DocumentationFile>
+    <DocumentationFile>api.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netcoreapp2.0\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />

@@ -77,7 +77,7 @@ namespace swcApi.Controllers
         ///    "value2"
         /// }
         ///</remarks>
-        [HttpGet("{identifier}")]
+       [HttpGet("{identifier}")]
         public Referrer Detail(string identifier)
         {
             return _referrerService.GetReferer(identifier);
