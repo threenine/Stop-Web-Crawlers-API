@@ -7,25 +7,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Swc.Service.Tests
 {
-    public class InMemoryTestFixture : IDisposable
+    public class TestDBContext : ApiContext
     {
-        public ApiContext Context => InMemoryContext();
-
-        public void Dispose()
+        public TestDBContext(DbContextOptions<ApiContext> options) : base(options)
         {
-            Context?.Dispose();
         }
 
-        private ApiContext InMemoryContext()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var options = new DbContextOptionsBuilder<ApiContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .EnableSensitiveDataLogging()
-                .Options;
-            var context = new ApiContext(options);
-
-            context.Threats.AddRange();
-            return context;
+            modelBuilder.Entity<Threat>().Property(p => p.Identifier).HasComputedColumnSql("CONCAT('" + DBGlobals.IdentifierFormat + "' , [Id])");
+            modelBuilder.Entity<ThreatType>();
+            modelBuilder.Entity<Status>();
+            base.OnModelCreating(modelBuilder);
         }
     }
+   
 }

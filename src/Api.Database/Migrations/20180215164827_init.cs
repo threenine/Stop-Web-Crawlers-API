@@ -54,7 +54,7 @@ namespace Api.Database.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Created = table.Column<DateTime>(nullable: false),
                     Host = table.Column<string>(nullable: true),
-                    Identifier = table.Column<string>(nullable: true, computedColumnSql: "CONCAT(' swc- ' , [Id])"),
+                    Identifier = table.Column<string>(nullable: true, computedColumnSql: "CONCAT('swc-' , [Id])"),
                     Modified = table.Column<DateTime>(nullable: false),
                     Protocol = table.Column<string>(nullable: true),
                     QueryString = table.Column<string>(nullable: true),

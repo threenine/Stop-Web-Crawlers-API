@@ -7,6 +7,6 @@ namespace Api.Database
  public static  class DBGlobals
  {
     public const string SchemaName = "swc";
-     public const string IdentifierFormat = " swc- ";
+     public const string IdentifierFormat = "swc-";
  }
 }

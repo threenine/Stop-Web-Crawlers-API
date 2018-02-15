@@ -63,7 +63,7 @@ namespace swcApi.Controllers
            var identifier =  _referrerService.Insert(referrer);
             
 
-            return CreatedAtRoute("Detail", new {  referer = identifier }, referrer);
+            return CreatedAtRoute("Detail",new{ identifier} ,referrer);
         }
 
         /// <summary>
@@ -77,10 +77,14 @@ namespace swcApi.Controllers
         ///    "value2"
         /// }
         ///</remarks>
-       [HttpGet("{identifier}")]
-        public Referrer Detail(string identifier)
+        [HttpGet]
+        [Route("api/referrer/{identifier}", Name = "Detail")]
+        public IActionResult Detail(string identifier)
         {
-            return _referrerService.GetReferer(identifier);
+            var referer=  _referrerService.GetReferer(identifier);
+            if (referer == null) return NotFound();
+
+            return Ok(referer);
         }
     }
 }

@@ -53,7 +53,7 @@ namespace Api.Database.Migrations
 
                     b.Property<string>("Identifier")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasComputedColumnSql("CONCAT(' swc- ' , [Id])");
+                        .HasComputedColumnSql("CONCAT('swc-' , [Id])");
 
                     b.Property<DateTime>("Modified");
 

@@ -11,7 +11,7 @@ using System;
 namespace Api.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20180209140148_init")]
+    [Migration("20180215164827_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,7 @@ namespace Api.Database.Migrations
 
                     b.Property<string>("Identifier")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasComputedColumnSql("CONCAT(' swc- ' , [Id])");
+                        .HasComputedColumnSql("CONCAT('swc-' , [Id])");
 
                     b.Property<DateTime>("Modified");
 

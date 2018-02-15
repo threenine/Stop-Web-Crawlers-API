@@ -18,8 +18,8 @@ namespace Swc.Service.Tests
             MapConfigurationFactory.Scan<ServiceTestFixture>();
         }
 
-        public ApiContext Context => InMemoryContext();
-        private ApiContext InMemoryContext()
+        public TestDBContext Context => InMemoryContext();
+        private TestDBContext InMemoryContext()
         {
             var options = new DbContextOptionsBuilder<ApiContext>()
                 .UseSqlite("DataSource=:memory:")
