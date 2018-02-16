@@ -11,8 +11,8 @@ using System;
 namespace Api.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20180215164827_init")]
-    partial class init
+    [Migration("20180216145222_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,7 @@ namespace Api.Database.Migrations
 
                     b.Property<string>("Identifier")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasComputedColumnSql("CONCAT('swc-' , [Id])");
+                        .HasComputedColumnSql("CONCAT('swc-',[Id])");
 
                     b.Property<DateTime>("Modified");
 
@@ -76,6 +76,10 @@ namespace Api.Database.Migrations
                     b.Property<string>("XForwardProto");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Referer")
+                        .IsUnique()
+                        .HasFilter("[Referer] IS NOT NULL");
 
                     b.HasIndex("StatusId");
 

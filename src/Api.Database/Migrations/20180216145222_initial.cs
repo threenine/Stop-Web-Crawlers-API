@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Api.Database.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,7 @@ namespace Api.Database.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Created = table.Column<DateTime>(nullable: false),
                     Host = table.Column<string>(nullable: true),
-                    Identifier = table.Column<string>(nullable: true, computedColumnSql: "CONCAT('swc-' , [Id])"),
+                    Identifier = table.Column<string>(nullable: true, computedColumnSql: "CONCAT('swc-',[Id])"),
                     Modified = table.Column<DateTime>(nullable: false),
                     Protocol = table.Column<string>(nullable: true),
                     QueryString = table.Column<string>(nullable: true),
@@ -83,6 +83,14 @@ namespace Api.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Threats_Referer",
+                schema: "swc",
+                table: "Threats",
+                column: "Referer",
+                unique: true,
+                filter: "[Referer] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Threats_StatusId",
