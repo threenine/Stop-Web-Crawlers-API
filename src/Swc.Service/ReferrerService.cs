@@ -18,21 +18,20 @@ namespace Swc.Service
 
         public ReferrerService(IUnitOfWork unitOfWork)
         {
-           
-            _unitOfWork = unitOfWork;
+           _unitOfWork = unitOfWork;
         }
         public IEnumerable<Referrer> GetAllActive()
         {
             var threats = _unitOfWork.GetRepository<Threat>()
                 .Get(predicate: x => x.Status.Name == Enabled && x.ThreatType.Name == Referer ).AsEnumerable();
-               
-
-            return Mapper.Map<IEnumerable<Referrer>>(source: threats);
+          return Mapper.Map<IEnumerable<Referrer>>(source: threats);
           
         }
 
-        public string  Insert(Referrer referrer)
+        public string  Insert(AddRefererer referrer)
         {
+            // TODO : Move this to a cache lookup.  We don't want to query on every ADD.
+            // TODO :  Expected Volumes could be immense to so we need to optimise 
             var refType =_unitOfWork.GetRepository<ThreatType>().Get(x => x.Name == Referer).SingleOrDefault();
             var status = _unitOfWork.GetRepository<Status>().Get(x=> x.Name == Moderate).SingleOrDefault();
 

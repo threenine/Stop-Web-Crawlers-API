@@ -15,38 +15,22 @@
               Returns a list of all active referrer spammers
              </summary>
             <remarks>
-             This is a remark to add additional information about this method
-              GET /get
-             {
-                "value1", 
-                "value2"
-             }
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.ReferrerController.Post(Api.Domain.Bots.Referrer)">
+        <member name="M:swcApi.Controllers.ReferrerController.Post(Api.Domain.Bots.AddRefererer)">
              <summary>
               Returns a collection of values
              </summary>
             <remarks>
              This is a remark to add additional information about this method
-              GET /get
-             {
-                "value1", 
-                "value2"
-             }
             </remarks>
         </member>
         <member name="M:swcApi.Controllers.ReferrerController.Detail(System.String)">
              <summary>
-              Returns a collection of values
+              Returns Details of a selected Referrer
              </summary>
             <remarks>
-             This is a remark to add additional information about this method
-              GET /get
-             {
-                "value1", 
-                "value2"
-             }
+            
             </remarks>
         </member>
     </members>

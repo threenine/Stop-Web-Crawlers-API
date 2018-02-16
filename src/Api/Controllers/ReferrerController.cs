@@ -27,12 +27,6 @@ namespace swcApi.Controllers
         ///  Returns a list of all active referrer spammers
         /// </summary>
         ///<remarks>
-        /// This is a remark to add additional information about this method
-        ///  GET /get
-        /// {
-        ///    "value1", 
-        ///    "value2"
-        /// }
         ///</remarks>
         [HttpGet]
         public IEnumerable<Referrer> Get()
@@ -46,14 +40,9 @@ namespace swcApi.Controllers
         /// </summary>
         ///<remarks>
         /// This is a remark to add additional information about this method
-        ///  GET /get
-        /// {
-        ///    "value1", 
-        ///    "value2"
-        /// }
         ///</remarks>
         [HttpPost]
-        public IActionResult Post([FromBody] Referrer referrer)
+        public IActionResult Post([FromBody] AddRefererer referrer)
         {
             if (referrer == null)
             {
@@ -67,15 +56,10 @@ namespace swcApi.Controllers
         }
 
         /// <summary>
-        ///  Returns a collection of values
+        ///  Returns Details of a selected Referrer
         /// </summary>
         ///<remarks>
-        /// This is a remark to add additional information about this method
-        ///  GET /get
-        /// {
-        ///    "value1", 
-        ///    "value2"
-        /// }
+        ///
         ///</remarks>
         [HttpGet]
         [Route("{identifier}", Name = "Detail")]
