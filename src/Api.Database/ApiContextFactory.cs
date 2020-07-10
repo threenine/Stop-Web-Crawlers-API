@@ -15,7 +15,6 @@ public class ApiContextFactory : IDesignTimeDbContextFactory<ApiContext>
         {
         }
 
-
         public ApiContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<ApiContext>();
