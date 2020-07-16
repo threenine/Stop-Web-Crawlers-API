@@ -1,10 +1,10 @@
 version: '3.5'
 services:
   postgres:
-    container_name: postgres_container
+    container_name: swc_postgres
     image: postgres
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: swcapi
       POSTGRES_PASSWORD: password12@
       PGDATA: /data/postgres
     volumes:

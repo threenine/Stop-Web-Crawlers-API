@@ -8,8 +8,6 @@ namespace Api.Database.Entity.Threats
       
         public string Identifier { get; set; }
 
-        [StringLength(255)]
-        [DataType(DataType.Text)]
         public string Referer { get; set; }
 
         public string Host { get; set; }
