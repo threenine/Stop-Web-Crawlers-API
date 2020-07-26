@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Threats
 {
-    public class Threat : BaseEntity
+    public class Threat
     {
       
         public string Identifier { get; set; }

@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 
 
-namespace Api.Database
+namespace Api.Database.Postgre
 {
-public class ApiContextFactory : IDesignTimeDbContextFactory<ApiContext>
+    public class SwcContextFactory : IDesignTimeDbContextFactory<SwcContext>
     {
-        public ApiContextFactory()
+        public SwcContextFactory()
         {
         }
 
@@ -21,13 +16,13 @@ public class ApiContextFactory : IDesignTimeDbContextFactory<ApiContext>
             .AddJsonFile("appsettings.json")
             .Build();
 
-        public ApiContext CreateDbContext(string[] args)
+        public SwcContext CreateDbContext(string[] args)
         {
             
-            var builder = new DbContextOptionsBuilder<ApiContext>();
+            var builder = new DbContextOptionsBuilder<SwcContext>();
             builder.UseNpgsql(Configuration.GetConnectionString("defaultConnection"));
 
-            return new ApiContext(builder.Options);
+            return new SwcContext(builder.Options);
         }
     }
 }

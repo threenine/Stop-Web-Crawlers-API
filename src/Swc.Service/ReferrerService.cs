@@ -36,9 +36,7 @@ namespace Swc.Service
             var status = _unitOfWork.GetRepository<Status>().Get(x=> x.Name == Moderate).SingleOrDefault();
 
             var threat = Mapper.Map<Threat>(referrer);
-
-            threat.StatusId =  status.Id;
-            threat.TypeId = refType.Id;
+           
             threat.ThreatType = refType;
             threat.Status = status;
            

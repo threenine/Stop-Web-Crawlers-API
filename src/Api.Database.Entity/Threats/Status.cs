@@ -3,17 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api.Database.Entity.Threats
 {
-    public class Status : BaseEntity
+    public class Status
     {
         public Status()
         {
         }
 
-        [Required]
-        [StringLength(25)]
-        public string Name { get; set; }
-
-        [StringLength(255)]
+        public int Id { get; set; }
+       public string Name { get; set; }
+       
         public string  Description { get; set; }
 
         public virtual ICollection<Threat> Threats { get; set; }
