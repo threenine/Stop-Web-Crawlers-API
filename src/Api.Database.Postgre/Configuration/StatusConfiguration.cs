@@ -9,7 +9,19 @@ namespace Api.Database.Postgre.Configuration
         private const string TableName = "status";
         public void Configure(EntityTypeBuilder<Status> builder)
         {
-            throw new System.NotImplementedException();
+            builder.ToTable(TableName);
+
+            builder.HasKey(kt => kt.Id);
+
+            builder.Property(kt => kt.Name)
+                .HasColumnType("varchar(45)")
+                .HasConversion<string>();
+
+            builder.HasData(
+                new ThreatType {Id = 1, Name = "Active"},
+                new ThreatType {Id = 2, Name = "Malignent"}
+               
+            );
         }
     }
 }
