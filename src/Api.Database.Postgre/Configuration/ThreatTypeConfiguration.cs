@@ -11,15 +11,22 @@ namespace Api.Database.Postgre.Configuration
         {
             builder.ToTable(TableName);
 
-            builder.HasKey(kt => kt.Id);
+            builder.HasKey(t => t.Id);
 
-            builder.Property(kt => kt.Name)
+            builder.Property(t => t.Name)
+                .HasColumnName("name")
                 .HasColumnType("varchar(45)")
-                .HasConversion<string>();
+                .HasMaxLength(45);
+               
+            
+            builder.Property(s => s.Description)
+                .HasColumnName("description")
+                .HasColumnType("varchar(255)")
+                .HasMaxLength(255);
 
             builder.HasData(
-                new ThreatType {Id = 1, Name = "Referrer Spam"},
-                new ThreatType {Id = 2, Name = "Web Crawler"}
+                new ThreatType {Id = 1, Name = "Referrer Spam", Description = "a Referrer spammer"},
+                new ThreatType {Id = 2, Name = "Web Crawler", Description = "potential search engine or index spider"}
                
             );
         }

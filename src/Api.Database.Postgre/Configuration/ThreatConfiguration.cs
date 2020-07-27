@@ -48,7 +48,7 @@ namespace Api.Database.Postgre.Configuration
                 .HasColumnType("varchar(256)");
 
             builder.Property(kt => kt.Protocol)
-                .HasColumnType("varchar(20)")
+                .HasColumnName("protocol")
                 .HasMaxLength(256)
                 .HasColumnType("varchar(256)");
 
