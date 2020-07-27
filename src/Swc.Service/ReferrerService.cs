@@ -23,7 +23,7 @@ namespace Swc.Service
         public IEnumerable<Referrer> GetAllActive()
         {
             var threats = _unitOfWork.GetRepository<Threat>()
-                .Get(predicate: x => x.Status.Name == Enabled && x.ThreatType.Name == Referer ).AsEnumerable();
+                .GetList(predicate: x => x.Status.Name == Enabled && x.ThreatType.Name == Referer );
           return Mapper.Map<IEnumerable<Referrer>>(source: threats);
           
         }
@@ -32,16 +32,16 @@ namespace Swc.Service
         {
             // TODO : Move this to a cache lookup.  We don't want to query on every ADD.
             // TODO :  Expected Volumes could be immense to so we need to optimise 
-            var refType =_unitOfWork.GetRepository<ThreatType>().Get(x => x.Name == Referer).SingleOrDefault();
-            var status = _unitOfWork.GetRepository<Status>().Get(x=> x.Name == Moderate).SingleOrDefault();
+            var refType =_unitOfWork.GetRepository<ThreatType>().SingleOrDefault(x => x.Name == Referer);
+            var status = _unitOfWork.GetRepository<Status>().SingleOrDefault(x=> x.Name == Moderate);
 
             var threat = Mapper.Map<Threat>(referrer);
            
             threat.ThreatType = refType;
             threat.Status = status;
            
-            _unitOfWork.GetRepository<Threat>().Add(threat);
-            _unitOfWork.SaveChanges();
+            _unitOfWork.GetRepository<Threat>().Insert(threat);
+            _unitOfWork.Commit();
 
             return threat.Identifier;
 
@@ -49,7 +49,7 @@ namespace Swc.Service
 
         public Referrer GetReferer(string identifier)
         {
-            var threat = _unitOfWork.GetRepository<Threat>().Get(x => x.Identifier == identifier).SingleOrDefault();
+            var threat = _unitOfWork.GetRepository<Threat>().SingleOrDefault(x => x.Identifier == identifier);
             return Mapper.Map<Referrer>(threat);
         }
     }

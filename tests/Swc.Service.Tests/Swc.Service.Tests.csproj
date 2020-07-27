@@ -12,8 +12,8 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="Moq" Version="4.8.1" />
     <PackageReference Include="NBuilder" Version="5.0.0" />
-    <PackageReference Include="Threenine.Data" Version="1.1.1" />
-    <PackageReference Include="Threenine.Map" Version="1.0.2" />
+    <PackageReference Include="Threenine.Data" Version="2.0.210" />
+    <PackageReference Include="Threenine.Map" Version="1.0.3" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Api.Database.Entity\Api.Database.Entity.csproj" />
-    <ProjectReference Include="..\..\src\Api.Database\Api.Database.csproj" />
     <ProjectReference Include="..\..\src\Api.Domain\Api.Domain.csproj" />
     <ProjectReference Include="..\..\src\Swc.Service\Swc.Service.csproj" />
   </ItemGroup>

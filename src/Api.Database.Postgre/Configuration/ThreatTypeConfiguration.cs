@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Api.Database.Postgre.Configuration
 {
-    public class ThreatTypeConfiguration : IEntityTypeConfiguration<ThreatType>
+    internal class ThreatTypeConfiguration : IEntityTypeConfiguration<ThreatType>
     {
         private const string TableName = "threat_type";
         public void Configure(EntityTypeBuilder<ThreatType> builder)
