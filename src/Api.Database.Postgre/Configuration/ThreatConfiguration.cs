@@ -19,7 +19,7 @@ namespace Api.Database.Postgre.Configuration
                 .IsRequired();
 
             builder.HasIndex(x => x.Identifier)
-                .HasName("document_unique_identifier")
+                .HasName("identifier")
                 .IsUnique();
 
             builder.Property(x => x.Host)
@@ -35,22 +35,22 @@ namespace Api.Database.Postgre.Configuration
             builder.Property(x => x.QueryString)
                 .HasColumnName("query_string")
                 .HasMaxLength(256)
-                .HasColumnType("nvarchar(256)");
+                .HasColumnType("varchar(256)");
 
             builder.Property(x => x.XForwardHost)
-                .HasColumnName("xForwardHost")
+                .HasColumnName("x_forward_host")
                 .HasMaxLength(256)
-                .HasColumnType("nvarchar(256)");
+                .HasColumnType("varchar(256)");
 
             builder.Property(x => x.XForwardProto)
-                .HasColumnName("xForwardProto")
+                .HasColumnName("x_forward_proto")
                 .HasMaxLength(256)
-                .HasColumnType("nvarchar(256)");
+                .HasColumnType("varchar(256)");
 
             builder.Property(kt => kt.Protocol)
                 .HasColumnType("varchar(20)")
                 .HasMaxLength(256)
-                .HasColumnType("nvarchar(256)");
+                .HasColumnType("varchar(256)");
 
             builder.HasOne(x => x.Status)
                 .WithMany(t => t.Threats)

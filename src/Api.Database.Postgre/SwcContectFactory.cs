@@ -20,7 +20,7 @@ namespace Api.Database.Postgre
         {
             
             var builder = new DbContextOptionsBuilder<SwcContext>();
-            builder.UseNpgsql(Configuration.GetConnectionString("defaultConnection"));
+            builder.UseNpgsql(Configuration.GetConnectionString("postgre"));
 
             return new SwcContext(builder.Options);
         }

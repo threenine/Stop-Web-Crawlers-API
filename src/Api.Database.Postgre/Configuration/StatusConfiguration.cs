@@ -19,7 +19,7 @@ namespace Api.Database.Postgre.Configuration
 
             builder.HasData(
                 new ThreatType {Id = 1, Name = "Active"},
-                new ThreatType {Id = 2, Name = "Malignent"}
+                new ThreatType {Id = 2, Name = "Malign"}
                
             );
         }
