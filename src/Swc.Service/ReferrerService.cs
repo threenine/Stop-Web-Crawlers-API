@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Api.Database.Entity.Threats;
 using Api.Domain.Bots;
 using Threenine.Data;
@@ -27,7 +28,7 @@ namespace Swc.Service
           
         }
 
-        public Guid  Insert(AddRefererer referrer)
+        public async Task<Referrer>  Insert(AddRefererer referrer)
         {
             // TODO : Move this to a cache lookup.  We don't want to query on every ADD.
             // TODO :  Expected Volumes could be immense to so we need to optimise 
@@ -39,14 +40,14 @@ namespace Swc.Service
             threat.ThreatType = refType;
             threat.Status = status;
            
-            _unitOfWork.GetRepository<Threat>().Insert(threat);
-            _unitOfWork.Commit();
-
-            return threat.Identifier;
+           var result = await  _unitOfWork.GetRepositoryAsync<Threat>().InsertAsync(threat);
+          await  _unitOfWork.CommitAsync();
+                
+            return Mapper.Map<Referrer>(result);
 
         }
 
-        public Referrer Details(string name)
+        public async Task<Referrer> Details(string name)
         {
             var threat = _unitOfWork.GetRepository<Threat>().SingleOrDefault(x => x.Referer == name);
             return Mapper.Map<Referrer>(threat);

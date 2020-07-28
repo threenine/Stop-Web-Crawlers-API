@@ -10,15 +10,18 @@ namespace Api.Domain.Bots
 {
   public  class AddRefererer : ICustomMap
     {
-        [Required]
-        [StringLength(255)]
+        [Required, StringLength(55)]
         public string Referer { get; set; }
+        
+        [Required, StringLength(256)]
+        public Uri Url { get; set; }
 
         public void CustomMap(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<AddRefererer, Threat>()
               
-                .ForMember(dest => dest.Referer, opt => opt.MapFrom(src => src.Referer));
+                .ForMember(dest => dest.Referer, opt => opt.MapFrom(src => src.Url.AbsoluteUri))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Referer));
         }
     }
 }

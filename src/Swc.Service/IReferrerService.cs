@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Api.Domain.Bots;
 
 namespace Swc.Service
@@ -7,8 +8,8 @@ namespace Swc.Service
     public interface IReferrerService
     {
         IEnumerable<Referrer> GetAllActive();
-        Guid Insert(AddRefererer referrer);
-        Referrer Details(string name);
+        Task<Referrer> Insert(AddRefererer referrer);
+        Task<Referrer> Details(string name);
 
     }
 }
