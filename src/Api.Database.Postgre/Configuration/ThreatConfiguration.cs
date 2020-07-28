@@ -4,53 +4,71 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Api.Database.Postgre.Configuration
 {
-    internal class ThreatConfiguration  : IEntityTypeConfiguration<Threat>
+    internal class ThreatConfiguration : IEntityTypeConfiguration<Threat>
     {
-        private const string TableName = "threat";
         public void Configure(EntityTypeBuilder<Threat> builder)
         {
-            builder.ToTable(TableName);
+            builder.ToTable(TableName.Threat);
             builder.HasKey(x => x.Identifier);
-
-            builder.Property(x => x.Identifier)
-                .HasColumnName("identifier")
-                .HasColumnType("varchar(36)")
-                .HasMaxLength(36)
-                .IsRequired();
-
+            
             builder.HasIndex(x => x.Identifier)
-                .HasName("identifier")
+                .HasName(ColumnName.Identifier)
                 .IsUnique();
 
+            builder.Property(x => x.Identifier)
+                .HasColumnName(ColumnName.Identifier)
+                .HasColumnType(ColumnTypeName.UUID)
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            builder.Property(x => x.Name)
+                .HasColumnName(ColumnName.Name)
+                .HasColumnType(ColumnTypeName.VARCHAR)
+                .HasMaxLength(55)
+                .IsRequired();
+
             builder.Property(x => x.Host)
-                .HasColumnName("host")
-                .HasColumnType("varchar(41)")
+                .HasColumnName(ColumnName.Host)
+                .HasColumnType(ColumnTypeName.VARCHAR)
                 .HasMaxLength(41);
 
             builder.Property(x => x.Referer)
-                .HasColumnName("referrer")
-                .HasColumnType("varchar(256)")
+                .HasColumnName(ColumnName.Referrer)
+                .HasColumnType(ColumnTypeName.VARCHAR)
                 .HasMaxLength(256);
 
             builder.Property(x => x.QueryString)
-                .HasColumnName("query_string")
+                .HasColumnName(ColumnName.QueryString)
                 .HasMaxLength(256)
-                .HasColumnType("varchar(256)");
+                .HasColumnType(ColumnTypeName.VARCHAR);
 
             builder.Property(x => x.XForwardHost)
-                .HasColumnName("x_forward_host")
+                .HasColumnName(ColumnName.XForwardHost)
                 .HasMaxLength(256)
-                .HasColumnType("varchar(256)");
+                .HasColumnType(ColumnTypeName.VARCHAR);
 
             builder.Property(x => x.XForwardProto)
-                .HasColumnName("x_forward_proto")
+                .HasColumnName(ColumnName.xForwardProto)
                 .HasMaxLength(256)
-                .HasColumnType("varchar(256)");
+                .HasColumnType(ColumnTypeName.VARCHAR);
 
             builder.Property(kt => kt.Protocol)
-                .HasColumnName("protocol")
+                .HasColumnName(ColumnName.Protocol)
                 .HasMaxLength(256)
-                .HasColumnType("varchar(256)");
+                .HasColumnType(ColumnTypeName.VARCHAR);
+
+            builder.Property(x => x.UserAgent)
+                .HasColumnName(ColumnName.UserAgent)
+                .HasColumnType(ColumnTypeName.VARCHAR)
+                .HasMaxLength(35);
+
+            builder.Property(x => x.StatusId)
+                .HasColumnType(ColumnTypeName.INT)
+                .HasColumnName(ColumnName.StatusID);
+
+            builder.Property(x => x.ThreatTypeId)
+                .HasColumnType(ColumnTypeName.INT)
+                .HasColumnName(ColumnName.ThreatTypeId);
 
             builder.HasOne(x => x.Status)
                 .WithMany(t => t.Threats)
@@ -58,7 +76,7 @@ namespace Api.Database.Postgre.Configuration
 
             builder.HasOne(d => d.ThreatType)
                 .WithMany(t => t.Threats)
-                .HasForeignKey(dt => dt.TypeId);
+                .HasForeignKey(dt => dt.ThreatTypeId);
         }
     }
 }

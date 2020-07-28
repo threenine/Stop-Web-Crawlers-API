@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Api.Database.Entity.Threats;
 using Api.Domain.Bots;
 using Threenine.Data;
@@ -28,7 +27,7 @@ namespace Swc.Service
           
         }
 
-        public string  Insert(AddRefererer referrer)
+        public Guid  Insert(AddRefererer referrer)
         {
             // TODO : Move this to a cache lookup.  We don't want to query on every ADD.
             // TODO :  Expected Volumes could be immense to so we need to optimise 
@@ -47,9 +46,9 @@ namespace Swc.Service
 
         }
 
-        public Referrer GetReferer(string identifier)
+        public Referrer Details(string name)
         {
-            var threat = _unitOfWork.GetRepository<Threat>().SingleOrDefault(x => x.Identifier == identifier);
+            var threat = _unitOfWork.GetRepository<Threat>().SingleOrDefault(x => x.Referer == name);
             return Mapper.Map<Referrer>(threat);
         }
     }

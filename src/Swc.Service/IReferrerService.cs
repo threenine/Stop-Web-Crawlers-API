@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Api.Domain.Bots;
 
 namespace Swc.Service
@@ -6,8 +7,8 @@ namespace Swc.Service
     public interface IReferrerService
     {
         IEnumerable<Referrer> GetAllActive();
-        string Insert(AddRefererer referrer);
-        Referrer GetReferer(string identifier);
+        Guid Insert(AddRefererer referrer);
+        Referrer Details(string name);
 
     }
 }

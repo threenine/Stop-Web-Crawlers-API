@@ -6,22 +6,27 @@ namespace Api.Database.Postgre.Configuration
 {
     internal class ThreatTypeConfiguration : IEntityTypeConfiguration<ThreatType>
     {
-        private const string TableName = "threat_type";
+       
         public void Configure(EntityTypeBuilder<ThreatType> builder)
         {
-            builder.ToTable(TableName);
+            builder.ToTable(TableName.ThreatType);
 
             builder.HasKey(t => t.Id);
+            builder.Property(x => x.Id)
+                .IsRequired()
+                .UseIdentityColumn()
+                .HasColumnType(ColumnTypeName.INT);
+            
 
             builder.Property(t => t.Name)
                 .HasColumnName("name")
-                .HasColumnType("varchar(45)")
+                .HasColumnType(ColumnTypeName.VARCHAR)
                 .HasMaxLength(45);
                
             
             builder.Property(s => s.Description)
                 .HasColumnName("description")
-                .HasColumnType("varchar(255)")
+                .HasColumnType(ColumnTypeName.VARCHAR)
                 .HasMaxLength(255);
 
             builder.HasData(
