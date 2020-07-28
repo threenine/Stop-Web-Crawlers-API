@@ -25,17 +25,30 @@ namespace swcApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOpenApiDocument();
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            // Register the Swagger generator and the Swagger UI middleware
+            app.UseSwaggerUi3();
+
+            app.UseOpenApi(settings =>
+            {
+                settings.PostProcess = (document, request) =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "Stop Web Crawlers API";
+                };
+            });
             app.UseHttpsRedirection();
 
             app.UseRouting();
