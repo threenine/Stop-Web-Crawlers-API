@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Api.Domain.Bots;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 using Swc.Service;
 
 namespace swcApi.Controllers
@@ -21,8 +23,10 @@ namespace swcApi.Controllers
         {
             return _referrerService.GetAllActive();
         }
-
+        
         [HttpGet("{identifier}")]
+        [SwaggerResponse(HttpStatusCode.OK, typeof(Referrer), Description = "A single Referrer object containing information regarding the referrer ")]
+       
         public async Task<ActionResult<Referrer>> Get(string identifier)
         {
             var referrer = await _referrerService.Details(identifier);

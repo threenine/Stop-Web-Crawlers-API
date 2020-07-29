@@ -72,7 +72,8 @@ namespace Api.Database.Postgre.Configuration
 
             builder.HasOne(x => x.Status)
                 .WithMany(t => t.Threats)
-                .HasForeignKey(dt => dt.StatusId);
+                .HasForeignKey(dt => dt.StatusId)
+                ;
 
             builder.HasOne(d => d.ThreatType)
                 .WithMany(t => t.Threats)

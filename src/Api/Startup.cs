@@ -1,15 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
+using Api.Database.Postgre;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NSwag;
+using Swc.Service;
+using Threenine.Data.DependencyInjection;
+using Threenine.Map;
 
 namespace swcApi
 {
@@ -27,12 +34,18 @@ namespace swcApi
         {
             services.AddOpenApiDocument();
             services.AddControllers();
+            services.AddDbContext<SwcContext>(options =>
+                    options.UseNpgsql(Configuration.GetConnectionString("postgre")))
+                .AddUnitOfWork<SwcContext>();
+            
+            services.AddTransient<IReferrerService, ReferrerService>();
+                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-           
+            MapConfigurationFactory.Scan<Startup>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -40,6 +53,7 @@ namespace swcApi
 
             // Register the Swagger generator and the Swagger UI middleware
             app.UseSwaggerUi3();
+            app.UseReDoc(); // serve ReDoc UI
 
             app.UseOpenApi(settings =>
             {
@@ -47,6 +61,12 @@ namespace swcApi
                 {
                     document.Info.Version = "v1";
                     document.Info.Title = "Stop Web Crawlers API";
+                    document.Info.Description =
+                        "Stop Web Crawlers Update API to enable the update of Referer Spammer Lists";
+                    document.Info.TermsOfService = "Coming Soon";
+                    document.Info.Contact = new OpenApiContact
+                        {Name = "threenine.co.uk", Email = "support@threenine.co.uk", Url = "https://threenine.co.uk"};
+                    
                 };
             });
             app.UseHttpsRedirection();
@@ -55,10 +75,7 @@ namespace swcApi
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

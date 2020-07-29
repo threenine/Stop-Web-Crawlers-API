@@ -24,7 +24,7 @@ namespace Swc.Service
         {
             var threats = _unitOfWork.GetRepository<Threat>()
                 .GetList(predicate: x => x.Status.Name == Enabled && x.ThreatType.Name == Referer );
-          return Mapper.Map<IEnumerable<Referrer>>(source: threats);
+          return Mapper.Map<IEnumerable<Referrer>>(source: threats.Items);
           
         }
 
