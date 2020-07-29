@@ -4,9 +4,9 @@ using Threenine.Diogel.Database.Postgre.Configuration;
 
 namespace Threenine.Diogel.Database.Postgre
 {
-    public class SwcContext : DbContext
+    public class DiogelContext : DbContext
     {
-        public SwcContext(DbContextOptions<SwcContext> options) : base(options)
+        public DiogelContext(DbContextOptions<DiogelContext> options) : base(options)
         {
         }
         public DbSet<Threat> Threats { get; set; }

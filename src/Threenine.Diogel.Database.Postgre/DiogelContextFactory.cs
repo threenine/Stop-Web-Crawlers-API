@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace Threenine.Diogel.Database.Postgre
 {
-    public class SwcContextFactory : IDesignTimeDbContextFactory<SwcContext>
+    public class DiogelContextFactory : IDesignTimeDbContextFactory<DiogelContext>
     {
-        public SwcContextFactory()
+        public DiogelContextFactory()
         {
         }
 
@@ -15,13 +15,13 @@ namespace Threenine.Diogel.Database.Postgre
             .AddJsonFile("appsettings.json")
             .Build();
 
-        public SwcContext CreateDbContext(string[] args)
+        public DiogelContext CreateDbContext(string[] args)
         {
             
-            var builder = new DbContextOptionsBuilder<SwcContext>();
+            var builder = new DbContextOptionsBuilder<DiogelContext>();
             builder.UseNpgsql(Configuration.GetConnectionString("postgre"));
 
-            return new SwcContext(builder.Options);
+            return new DiogelContext(builder.Options);
         }
     }
 }

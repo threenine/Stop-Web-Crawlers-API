@@ -26,9 +26,9 @@ namespace Threenine.Diogel.Api
         {
             services.AddOpenApiDocument();
             services.AddControllers();
-            services.AddDbContext<SwcContext>(options =>
+            services.AddDbContext<DiogelContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("postgre")))
-                .AddUnitOfWork<SwcContext>();
+                .AddUnitOfWork<DiogelContext>();
             
             services.AddTransient<IReferrerService, ReferrerService>();
                 

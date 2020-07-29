@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Threenine.Diogel.Database.Postgre.Migrations
 {
-    [DbContext(typeof(SwcContext))]
+    [DbContext(typeof(DiogelContext))]
     partial class SwcContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
