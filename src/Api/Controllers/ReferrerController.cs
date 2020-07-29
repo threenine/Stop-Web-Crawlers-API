@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Api.Domain.Bots;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
-using Swc.Service;
+using Threenine.Diogel.Domain.Bots;
+using Threenine.Diogel.Service;
 
-namespace swcApi.Controllers
+namespace Threenine.Diogel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
