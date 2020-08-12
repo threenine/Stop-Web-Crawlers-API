@@ -15,6 +15,7 @@ namespace Threenine.Diogel.Database.Postgre
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasPostgresExtension("uuid-ossp");
             modelBuilder.ApplyConfiguration(new StatusConfiguration());
             modelBuilder.ApplyConfiguration(new TypeConfiguration());
             modelBuilder.ApplyConfiguration(new ThreatConfiguration());

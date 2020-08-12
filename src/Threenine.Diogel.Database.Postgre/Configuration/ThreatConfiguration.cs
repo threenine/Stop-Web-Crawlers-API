@@ -10,6 +10,7 @@ namespace Threenine.Diogel.Database.Postgre.Configuration
         public void Configure(EntityTypeBuilder<Threat> builder)
         {
             builder.ToTable(TableName.Threat);
+            
             builder.HasKey(x => x.Identifier);
             
             builder.HasIndex(x => x.Identifier)
@@ -19,6 +20,7 @@ namespace Threenine.Diogel.Database.Postgre.Configuration
             builder.Property(x => x.Identifier)
                 .HasColumnName(ColumnName.Identifier)
                 .HasColumnType(ColumnTypeName.UUID)
+                .HasDefaultValueSql("uuid_generate_v4()")
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 

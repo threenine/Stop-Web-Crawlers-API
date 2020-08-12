@@ -8,7 +8,7 @@ using NSwag;
 using Threenine.Data.DependencyInjection;
 using Threenine.Diogel.Database.Postgre;
 using Threenine.Diogel.Service;
-using Threenine.Map;
+
 
 namespace Threenine.Diogel.Api
 {
@@ -37,7 +37,7 @@ namespace Threenine.Diogel.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            MapConfigurationFactory.Scan<Startup>();
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -70,4 +70,6 @@ namespace Threenine.Diogel.Api
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
+
+    
 }
