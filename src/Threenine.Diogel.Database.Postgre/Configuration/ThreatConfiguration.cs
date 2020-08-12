@@ -10,7 +10,6 @@ namespace Threenine.Diogel.Database.Postgre.Configuration
         public void Configure(EntityTypeBuilder<Threat> builder)
         {
             builder.ToTable(TableName.Threat);
-            
             builder.HasKey(x => x.Identifier);
             
             builder.HasIndex(x => x.Identifier)
