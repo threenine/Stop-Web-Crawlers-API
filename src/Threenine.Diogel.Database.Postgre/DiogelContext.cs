@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Threenine.Diogel.Database.Entity.Threats;
 using Threenine.Diogel.Database.Postgre.Configuration;
+using Threenine.Diogel.Database.Postgre.Constants;
 
 namespace Threenine.Diogel.Database.Postgre
 {
@@ -15,7 +17,7 @@ namespace Threenine.Diogel.Database.Postgre
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasPostgresExtension("uuid-ossp");
+            modelBuilder.HasPostgresExtension(PostgresExtensions.UUIDGenerator);
             modelBuilder.ApplyConfiguration(new StatusConfiguration());
             modelBuilder.ApplyConfiguration(new TypeConfiguration());
             modelBuilder.ApplyConfiguration(new ThreatConfiguration());
