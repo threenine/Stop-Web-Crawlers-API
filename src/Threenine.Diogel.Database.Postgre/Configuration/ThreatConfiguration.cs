@@ -20,8 +20,8 @@ namespace Threenine.Diogel.Database.Postgre.Configuration
                 .HasColumnName(ColumnName.Identifier)
                 .HasColumnType(ColumnTypeName.UUID)
                 .HasDefaultValueSql("uuid_generate_v4()")
-                .IsRequired()
-                .ValueGeneratedOnAdd();
+                .IsRequired();
+              
 
             builder.Property(x => x.Name)
                 .HasColumnName(ColumnName.Name)
