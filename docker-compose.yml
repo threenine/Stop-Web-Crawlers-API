@@ -1,21 +1,28 @@
-version: '3.5'
+version: '3.8'
 services:
-  postgres:
-    container_name: swc_postgres
-    image: postgres
+  seq:
+    container_name: diogel_seq
+    image: datalust/seq:latest
+    ports:
+      - 80:80
+      - 5341:5341
     environment:
-      POSTGRES_USER: swcapi
-      POSTGRES_PASSWORD: password12@
-      PGDATA: /data/postgres
+      ACCEPT_EULA: Y
+    networks: 
+      - diogel
+  postgres:
+    container_name: diogel_postgre
+    image: postgres
+    env_file:
+      - .env
+    
     volumes:
       - postgres:/data/postgres
     ports:
       - "5432:5432"
     networks:
-      - postgres
+      - diogel
     restart: unless-stopped
 networks:
-  postgres:
+  diogel:
     driver: bridge
-volumes:
-  postgres:

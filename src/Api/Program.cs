@@ -1,20 +1,73 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Api.Behaviours;
+using Api.Middleware;
+using Database.Diogels;
+using FluentValidation;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using Threenine;
+using Threenine.Data.DependencyInjection;
+using Threenine.Services;
 
-namespace Threenine.Diogel.Api
+const string ConnectionsStringName = "Local_DB";
+
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
+
+Log.Information("Starting up");
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console()
+    .ReadFrom.Configuration(ctx.Configuration));
+
+builder.Services.AddSwaggerGen(c =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    c.SwaggerDoc("v1", new OpenApiInfo {Title = "Api", Version = "v1"});
+    c.CustomSchemaIds(x => x.FullName);
+    c.DocumentFilter<JsonPatchDocumentFilter>();
+    c.EnableAnnotations();
+});
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+builder.Services.AddMediatR(typeof(Program))
+    .AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>))
+    .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
-        private static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+var connectionString = builder.Configuration.GetConnectionString(ConnectionsStringName);
+builder.Services.AddDbContext<DiogelContext>(x => x.UseNpgsql(connectionString)).AddUnitOfWork<DiogelContext>();
+
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddTransient<IDataService, DataService>();
+
+
+var app = builder.Build();
+
+app.UseSerilogRequestLogging();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+// Database migrations
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<DiogelContext>();
+    context?.Database.Migrate();
 }
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
+}
+app.UseHttpsRedirection();
+
+
+app.UseAuthorization();
+app.MapControllers();
+app.Run();
