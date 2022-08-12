@@ -1,6 +1,5 @@
 using Api.Behaviours;
 using Api.Middleware;
-using Database.Diogels;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
